@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-EYOlr\/1YxqRBYdNu3OxsWlRoMSL8rqElz3sO0gCmIZU=",
+      "hash": "sha256-vg7wa2Wsgj3wqQ0SpdBuTXGg2h0q1h+OfKGKPO\/6t0k=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-p5b0eMSRIBErEpv9viaWYpoIrKw\/PLbYvXSVkT0N60k=",
+      "hash": "sha256-6g\/hZp+ohAz9lIOCSmOyO3D9MXWh\/OaPvTbzPTiO3os=",
       "url": "_framework\/EcoRoomCalculator.dll"
     },
     {
@@ -233,5 +233,5 @@
       "url": "sample-data\/weather.json"
     }
   ],
-  "version": "5yk1gUo1"
+  "version": "kLPEKv\/I"
 };
