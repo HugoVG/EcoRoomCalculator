@@ -1,0 +1,153 @@
+﻿@page "/"
+@using EcoRoomCalculator.Models
+@using System.Reflection
+
+<PageTitle>Index</PageTitle>
+<div>
+    <text>@length L * @width W * @height H : <b>@fluid<text>m³</text></b></text><br />
+    <text>Blocks used : @blocksUsed</text><br/>
+    <text>Ugly House(reduces blocks used)</text>
+    <input type="checkbox" @bind="decimate"/>
+</div>
+<div style="display: flex; flex-direction: row; justify-content:space-around; width: 500px; align-items: center;">
+
+    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
+        <button @onclick="(() => Increase(0, 1))">+</button><br />
+        <text>length: @length</text><br/>
+        <button @onclick="(() => Increase(0, -1))">-</button>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
+        <button @onclick="(() => Increase(1, 1))">+</button><br />
+        <text>width: @width</text><br/>
+        <button @onclick="(() => Increase(1, -1))">-</button>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
+        <button @onclick="(() => Increase(2, 1))" >+</button><br />
+        <text>height: @height</text><br/>
+        <button @onclick="(() => Increase(2, -1))">-</button>
+    </div>
+</div>
+<div>
+    <text>Automatically make room</text> <input type="number" @bind="guestimate"/><text>m³ (press enter on desktop)</text>
+</div>
+
+<br />
+<br />
+<div style="justify-content: center; display: flex; align-items: center; flex-direction: column">
+    @for (int i = 0; i < heightmap.GetLength(0); i++)
+    {
+        <div style="display: flex; flex-direction: row">
+            @for (int j = 0; j < heightmap.GetLength(1); j++)
+            {
+                <div style="width: 40px; background: bisque; height: 40px; text-align: center; border-style: solid ; border-color: black; border-width: 1px">
+                    @heightmap[i,j]
+                </div>
+            }
+        </div>
+    }
+    <div>
+
+    </div>
+</div>
+
+
+@code{
+    int width = 5;
+    int length = 5;
+    int height = 5;
+    int fluid = 25;
+    int blocksUsed = 0;
+    int _guestimate = 25;
+
+    int guestimate
+    {
+        get { return _guestimate; }
+        set
+        {
+            if (value > 10000)
+            {
+                return;
+            }
+            _guestimate = value;
+            var rm3 = Room.Atme3(value);
+            length = rm3.GetLength(0);
+            width = rm3.GetLength(1);
+            height = rm3.GetLength(2);
+            setRoom(length, width, height);
+
+
+        }
+    }
+    bool _decimate = false;
+
+    bool decimate
+    {
+        get { return _decimate; }
+        set { _decimate = value; setRoom(length, width, height); }
+    }
+
+
+    public Room room = new Room();
+    public int[,] heightmap =null;
+
+    #region Overrides of ComponentBase
+
+    /// <inheritdoc />
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        setRoom(length,width,height);
+    }
+
+    private void Increase(int s, int amount)
+    {
+        if (s == 0)
+        {
+            length += amount;
+            if (length < 4) length = 4;
+        }
+        else if (s == 1)
+        {
+            width += amount;
+            if (width < 4) width = 4;
+        }
+        else if (s == 2)
+        {
+            height += amount;
+            if (height < 4) height = 4;
+        }
+        setRoom(length,width,height);
+        StateHasChanged();
+    }
+
+    private void setRoom(int length, int width, int height)
+    {
+        room.Blocks = Room.ComposeTiles(length, width, height, 1);
+        heightmap = room.hmap;
+        if (decimate)
+        {
+            heightmap = Room.Decimate(heightmap);
+        }
+        fluid = Room.calculatefluid(room.Blocks);
+        if(heightmap != null)
+            blocksUsed = Room.Tilesfilled(heightmap);
+        StateHasChanged();
+    }
+    private void setRoom(Tile[,,] map)
+    {
+        room.Blocks = map;
+        heightmap = room.hmap;
+        if (decimate)
+        {
+            heightmap = Room.Decimate(heightmap);
+        }
+        fluid = Room.calculatefluid(room.Blocks);
+        if (heightmap != null)
+            blocksUsed = Room.Tilesfilled(heightmap);
+        StateHasChanged();
+    }
+
+
+    #endregion
+
+}
