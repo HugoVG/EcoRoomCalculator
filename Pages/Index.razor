@@ -3,54 +3,140 @@
 @using System.Reflection
 
 <PageTitle>Index</PageTitle>
-<div>
-    <text>@length L * @width W * @height H : <b>@fluid<text>m³</text></b></text><br />
-    <text>Blocks used : @blocksUsed</text><br/>
-    <text>Ugly House(reduces blocks used)</text>
-    <input type="checkbox" @bind="decimate"/>
-</div>
-<div style="display: flex; flex-direction: row; justify-content:space-around; width: 500px; align-items: center;">
-
-    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
-        <button @onclick="(() => Increase(0, 1))">+</button><br />
-        <text>length: @length</text><br/>
-        <button @onclick="(() => Increase(0, -1))">-</button>
-    </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
-        <button @onclick="(() => Increase(1, 1))">+</button><br />
-        <text>width: @width</text><br/>
-        <button @onclick="(() => Increase(1, -1))">-</button>
-    </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between; width: 150px">
-        <button @onclick="(() => Increase(2, 1))" >+</button><br />
-        <text>height: @height</text><br/>
-        <button @onclick="(() => Increase(2, -1))">-</button>
-    </div>
-</div>
-<div>
-    <text>Automatically make room</text> <input type="number" @bind="guestimate"/><text>m³ (press enter on desktop)</text>
-</div>
-
-<br />
-<br />
-<div style="justify-content: center; display: flex; align-items: center; flex-direction: column">
-    @for (int i = 0; i < heightmap.GetLength(0); i++)
-    {
-        <div style="display: flex; flex-direction: row">
-            @for (int j = 0; j < heightmap.GetLength(1); j++)
-            {
-                <div style="width: 40px; background: bisque; height: 40px; text-align: center; border-style: solid ; border-color: black; border-width: 1px">
-                    @heightmap[i,j]
-                </div>
-            }
+<nav class="navbar navbar-dark navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"><img style="width: 36px;height: 36px;" src="assets/img/products/EcoRoomCalcLogo.png" width="16" height="16"></span><span>Eco Room Calc</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1"></div>
         </div>
-    }
+    </nav><!-- End: Navbar Centered Links -->
+<header class="bg-dark">
+    <!-- Start: Features Cards -->
+    <div class="container py-4 py-xl-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <h2>Eco room Calculator</h2>
+            </div>
+        </div>
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-calculator">
+                                <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"></path>
+                                <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z"></path>
+                            </svg></div>
+                        <h4 class="card-title">Calculated your desired room size</h4>
+                        <p class="card-text">Need to expand your house&nbsp; or try to fit in another Workstation figure out here how to make it!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bounding-box">
+                                <path d="M5 2V0H0v5h2v6H0v5h5v-2h6v2h5v-5h-2V5h2V0h-5v2H5zm6 1v2h2v6h-2v2H5v-2H3V5h2V3h6zm1-2h3v3h-3V1zm3 11v3h-3v-3h3zM4 15H1v-3h3v3zM1 4V1h3v3H1z"></path>
+                            </svg></div>
+                        <h4 class="card-title">Auto calculated the room size best suited</h4>
+                        <p class="card-text">Use the automatic option to let It calculate the best dimensions for rooms</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div class="bs-icon-md bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center d-inline-block mb-3 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-align-bottom">
+                                <rect width="4" height="12" x="6" y="1" rx="1"></rect>
+                                <path d="M1.5 14a.5.5 0 0 0 0 1v-1zm13 1a.5.5 0 0 0 0-1v1zm-13 0h13v-1h-13v1z"></path>
+                            </svg></div>
+                        <h4 class="card-title">Make use of decimator</h4>
+                        <p class="card-text">Use the decimator to reduce the Blocks used in your room(does make it less visually appealing)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- End: Features Cards -->
+</header><!-- Start: Content Container -->
+<div class="container">
+    <!-- Start: Put content here -->
     <div>
+        <p style="text-align: center;margin: 0px 0px 4px;">@length L * @width W * @height H : <b>@fluid<text>m³</text></b><br></p>
+        <p style="text-align: center;">Blocks used: <b>@blocksUsed</b></p>
+        <div style="text-align: center;">
+            <div class="form-check" style="text-align: left;">
+                <input class="form-check-input" type="checkbox" id="formCheck-1" style="text-align: center;" @bind="decimate">
+                <label class="form-check-label" for="formCheck-1">Decimate(makes the house more ugly</label>
+            </div>
+            <div style="display: flex;">
+                <!-- Start: Length -->
+                <div style="padding: 10px;">
+                    <button class="btn btn-primary" type="button" @onclick="(() => Increase(0, 1))">
+                        +
+                    </button>
+                    <small style="font-size: 20px; text-align: center; margin: 10px;">
+                        Length: @length
+                    </small>
+                    <button class="btn btn-secondary" type="button" @onclick="(() => Increase(0, -1))">
+                        -
+                    </button>
+                </div><!-- End: Length -->
+                <!-- Start: Width -->
+                <div style="padding: 10px;">
+                    <button class="btn btn-primary" type="button"@onclick="(() => Increase(1, 1))">
+                        +
+                    </button>
+                    <small style="font-size: 20px; text-align: center; margin: 10px;">
+                        Width: @width
+                    </small>
+                    <button class="btn btn-secondary" type="button" @onclick="(() => Increase(1, -1))">
+                        -
+                    </button>
+                </div><!-- End: Width -->
+                <!-- Start: Height -->
+                <div style="padding: 10px;">
+                    <button class="btn btn-primary" type="button" @onclick="(() => Increase(2, 1))">
+                        +
+                    </button>
+                    <small style="font-size: 20px; text-align: center; margin: 10px;">
+                        Height: @height
+                    </small>
+                    <button class="btn btn-secondary" type="button" @onclick="(() => Increase(2, -1))">
+                        -
+                    </button>
+                </div><!-- End: Height -->
+            </div>
+        </div>
+        <div style="display: flex;">
+            <span>Automatically make room<br></span>
+            <input type="number" style="max-width: 100px;" @bind="guestimate">
+            <span>m³ (press enter on desktop)</span>
+        </div>
+        <div>
+            <div style="justify-content: center; display: flex; align-items: center; flex-direction: column">
+                @for (int i = 0; i < heightmap.GetLength(0); i++)
+                {
+                    <div style="display: flex; flex-direction: row">
+                        @for (int j = 0; j < heightmap.GetLength(1); j++)
+                        {
+                            <div style="width: 40px; background: #3763f4; height: 40px; text-align: center; border-style: solid ; border-color: black; border-width: 1px">
+                                @heightmap[i,j]
+                            </div>
+                        }
+                    </div>
+                }
+                <div>
 
+                </div>
+            </div>
+        </div>
+    </div><!-- End: Put content here -->
+</div><!-- End: Content Container -->
+<!-- Start: Footer Multi Column -->
+<footer class="bg-dark">
+    <div class="container py-4 py-lg-5">
+        <div class="text-muted d-flex justify-content-between align-items-center pt-3">
+            <p class="mb-0">Copyright © 2022 Hugovg -&nbsp;https://github.com/HugoVG/EcoRoomCalculator&nbsp;&nbsp;<br>GNU Affero General Public License v3.0&nbsp;</p>
+        </div>
     </div>
-</div>
-
-
+</footer><!-- End: Footer Multi Column -->
 @code{
     int width = 5;
     int length = 5;
