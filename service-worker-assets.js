@@ -33,11 +33,11 @@
       "url": "_framework\/icudt.dat"
     },
     {
-      "hash": "sha256-vg7wa2Wsgj3wqQ0SpdBuTXGg2h0q1h+OfKGKPO\/6t0k=",
+      "hash": "sha256-+yHb\/zuDwt0+5Fj9eFwxfo8vPRWLPKeuLdYZoacJ6iM=",
       "url": "_framework\/blazor.boot.json"
     },
     {
-      "hash": "sha256-6g\/hZp+ohAz9lIOCSmOyO3D9MXWh\/OaPvTbzPTiO3os=",
+      "hash": "sha256-tm8CG1BjmA+MxMjoKSFTAKYfBxzIiADIn8JPRV4cfKw=",
       "url": "_framework\/EcoRoomCalculator.dll"
     },
     {
@@ -161,6 +161,30 @@
       "url": "EcoRoomCalculator.styles.css"
     },
     {
+      "hash": "sha256-\/Hj\/0nWEH3mNYqwJoCZn5ooypNhO3a1PlDDmUxe7g3Q=",
+      "url": "assets\/bootstrap\/css\/bootstrap.min.css"
+    },
+    {
+      "hash": "sha256-pvV1EZik9p95c05ss6yuVPut\/qkQ\/prLDGHEu3SV0GY=",
+      "url": "assets\/bootstrap\/js\/bootstrap.min.js"
+    },
+    {
+      "hash": "sha256-mMlKnHbQFEl6oosoe9VxzC7jy969Qsfrqg5XOo7dM4g=",
+      "url": "assets\/css\/styles.min.css"
+    },
+    {
+      "hash": "sha256-fhYFP4ze4FLlyYApFmMKfa1RZ6ta4nows5trNhBUS1Y=",
+      "url": "assets\/img\/products\/EcoRoomCalcLogo.png"
+    },
+    {
+      "hash": "sha256-\/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej\/m4=",
+      "url": "assets\/js\/jquery.min.js"
+    },
+    {
+      "hash": "sha256-xNVUpPoCBNvmW64rjxGBuPLDHtcNVB2SJYR8ykAVhwU=",
+      "url": "assets\/js\/script.min.js"
+    },
+    {
       "hash": "sha256-kfXT+\/7PwnK7UBTMq8\/AX20+soj7u1sV\/U1lCtnmSZI=",
       "url": "css\/app.css"
     },
@@ -221,7 +245,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-cGrEcEnwIfwXakHGqlWX72xoma87p3SJXLEZ209l0Uw=",
+      "hash": "sha256-KtnOsEF3HC3UKJJZPql8UckFA09Hk7D33tHl6HTAkxE=",
       "url": "index.html"
     },
     {
@@ -233,5 +257,5 @@
       "url": "sample-data\/weather.json"
     }
   ],
-  "version": "kLPEKv\/I"
+  "version": "Zosqk95c"
 };

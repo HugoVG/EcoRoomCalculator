@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "EcoRoomCalculator.dll": "sha256-6g\/hZp+ohAz9lIOCSmOyO3D9MXWh\/OaPvTbzPTiO3os=",
+      "EcoRoomCalculator.dll": "sha256-tm8CG1BjmA+MxMjoKSFTAKYfBxzIiADIn8JPRV4cfKw=",
       "Microsoft.AspNetCore.Components.dll": "sha256-+7qgIljCCBA5L4DkAJZdme95ZvasRdwOjAiSfxYsP54=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-j7m+ptk2Pxamc1Sdlnv8VlSWsxhvgPvtmgdqKItFE10=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-hItIMIcIumfGi1q3IylwSEfpyLuK1QShnYCDeXYXF+M=",
