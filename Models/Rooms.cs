@@ -6,9 +6,6 @@ namespace EcoRoomCalculator.Models;
 public class PredefinedRooms
 {
     public Room room25_3;
-
-
-
 }
 
 public class Room
@@ -32,7 +29,6 @@ public class Room
     {
         get
         {
-            var allLength = Blocks.Length;
             var totalblock = 1;
             for (int i = 0; i < Blocks.Rank; i++)
             {
@@ -247,24 +243,21 @@ public class Room
         
         while (!source.Any(x=>x.Item4 >= to))
         {
-            Console.WriteLine($"Attempting :[{attemptvar.Item1}, {attemptvar.Item2}, {attemptvar.Item3}]");
             Tile[,,] attempt = ComposeTiles(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3, 1);
-            Console.WriteLine($"Attempting :Done");
             int fluid = calculatefluid(attempt);
-            Console.WriteLine($"Attempting Fluid :Done");
             int filled = Tilesfilled(attempt);
-            Console.WriteLine($"Attempting Filled :Done");
             source.Add(new Tuple<int, int, int, int, int>(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3, fluid, filled ));
-            if (fluid < to)
+            if (fluid >= to)
             {
-                if (attemptvar.Item1 > attemptvar.Item2)
-                {
-                    attemptvar = attemptvar.Item2 > attemptvar.Item3 ? new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3 + 1) : new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2+1, attemptvar.Item3);
-                }
-                else
-                {
-                    attemptvar = attemptvar.Item1 > attemptvar.Item3 ? new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3 + 1) : new Tuple<int, int, int>(attemptvar.Item1+1, attemptvar.Item2, attemptvar.Item3);
-                }
+                continue;
+            }
+            if (attemptvar.Item1 > attemptvar.Item2)
+            {
+                attemptvar = attemptvar.Item2 > attemptvar.Item3 ? new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3 + 1) : new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2+1, attemptvar.Item3);
+            }
+            else
+            {
+                attemptvar = attemptvar.Item1 > attemptvar.Item3 ? new Tuple<int, int, int>(attemptvar.Item1, attemptvar.Item2, attemptvar.Item3 + 1) : new Tuple<int, int, int>(attemptvar.Item1+1, attemptvar.Item2, attemptvar.Item3);
             }
         }
         var chose = source.First(x => x.Item4 >= to);
@@ -301,25 +294,18 @@ public class Room
         {
             for (int j = 0; j < attemp2.GetLength(1); j++)
             {
-                if (i == 0 || i == attemp2.GetLength(0) - 1 || j == 0 || j == attemp2.GetLength(1) - 1)
+                if (i != 0 && i != attemp2.GetLength(0) - 1 && j != 0 && j != attemp2.GetLength(1) - 1)
                 {
-                    if ((i + j) % 2 == 1)
-                    {
-                        attemp2[i, j] = attemp2[i, j] - 2;
-                    }
+                    continue;
+                }
+                if ((i + j) % 2 == 1)
+                {
+                    attemp2[i, j] = attemp2[i, j] - 2;
                 }
             }
         }
-        int attemp1total = 0;
-        foreach (var value in attemp1.Cast<int>().ToArray())
-        {
-            attemp1total += value;
-        }
-        int attemp2total = 0;
-        foreach (var value in attemp2.Cast<int>().ToArray())
-        {
-            attemp2total += value;
-        }
+        int attemp1total = attemp1.Cast<int>().ToArray().Sum();
+        int attemp2total = attemp2.Cast<int>().ToArray().Sum();
 
         Console.WriteLine(attemp1total);
         Console.WriteLine(attemp2total);
@@ -362,10 +348,10 @@ public class Tile
 
     public Tile(int blocktier)
     {
-        this.tier = blocktier;
+        tier = blocktier;
     }
     public Tile()
     {
-        this.tier = 1;
+        tier = 1;
     }
 }

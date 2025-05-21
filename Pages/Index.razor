@@ -1,6 +1,5 @@
 ﻿@page "/"
 @using EcoRoomCalculator.Models
-@using System.Reflection
 
 <PageTitle>Index</PageTitle>
 <nav class="navbar navbar-dark navbar-expand-md sticky-top navbar-shrink py-3" id="mainNav">
@@ -133,7 +132,7 @@
 <footer class="bg-dark">
     <div class="container py-4 py-lg-5">
         <div class="text-muted d-flex justify-content-between align-items-center pt-3">
-            <p class="mb-0">Copyright © 2022 Hugovg -&nbsp;https://github.com/HugoVG/EcoRoomCalculator&nbsp;&nbsp;<br>GNU Affero General Public License v3.0&nbsp;</p>
+            <p class="mb-0">Copyright © @DateTime.Now.Year Hugovg -&nbsp;https://github.com/HugoVG/EcoRoomCalculator&nbsp;&nbsp;<br>GNU Affero General Public License v3.0&nbsp;</p>
         </div>
     </div>
 </footer><!-- End: Footer Multi Column -->
@@ -147,7 +146,7 @@
 
     int guestimate
     {
-        get { return _guestimate; }
+        get => _guestimate;
         set
         {
             //if (value == fluid)
@@ -173,7 +172,7 @@
 
     bool decimate
     {
-        get { return _decimate; }
+        get => _decimate;
         set { _decimate = value; setRoom(length, width, height); }
     }
 
@@ -221,7 +220,6 @@
             heightmap = Room.Decimate(heightmap);
         }
         fluid = Room.calculatefluid(room.Blocks);
-        //_guestimate = fluid;
         if(heightmap != null)
             blocksUsed = Room.Tilesfilled(heightmap);
         StateHasChanged();
@@ -237,7 +235,6 @@
         fluid = Room.calculatefluid(room.Blocks);
         if (heightmap != null)
             blocksUsed = Room.Tilesfilled(heightmap);
-        //guestimate = fluid;
         StateHasChanged();
     }
 
