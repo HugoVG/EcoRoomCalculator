@@ -19,6 +19,10 @@ jobs:
       with:
         dotnet-version: '9.0.x'
 
+    # install wasm-tools workload for Blazor WebAssembly
+    - name: Install wasm-tools workload
+      run: dotnet workload install wasm-tools
+
     # publishes Blazor project to the release-folder with WebAssembly-specific options
     - name: Publish .NET Project
       run: dotnet publish -c Release -o release --nologo -p:PublishTrimmed=true -p:BlazorEnableCompression=true
